@@ -12,40 +12,56 @@ training_logs = [
 # 3. Calculate the improvement in accuracy from epoch 1 to epoch 5
 # 4. Return all epochs where accuracy > 0.75
 
-# ==============================
-# STEP 1 PARSE LOGS
-# ==============================
+# BRR
+#================================
+# STEP 1 Parsed
+#================================
+
 parsed = []
-for line in training_logs:
-    parts = line.split()
+for log in training_logs:
+    parts = log.split()
     data = {}
 
-    for item in parts:
-        k, v = item.split("=", 1)
+    for part in parts:
+        k, v = part.split("=", 1)
         if k == "epoch":
             data[k] = int(v)
         else:
             data[k] = float(v)
     parsed.append(data)
+
 print("All parsed data:", parsed)
-# ==============================
-# STEP 2 FIND LOWEST LOSS
-# ==============================
-best_row = min(parsed, key=lambda d: d["loss"])
-best_epoch = best_row["epoch"]
-print("Best epoch (lowest loss):", best_epoch)
 
-# ===============================
-# STEP 3 CALCULATE IMPROVEMENT
-# ===============================
-acc_ep1 = parsed[0]["accuracy"]
-acc_ep5 = parsed[-1]["accuracy"]
-improvement = acc_ep5 - acc_ep1
-print("Accuracy improvement:", improvement, f"({improvement*100:.0f}%)")
+#=============================
+# STEP 2 Find best epoch
+#=============================
 
+lowest_loss = float("inf")
+best_epoch = None
 
-# ===============================
-# STEP 4 RETURN EPOCHS
-# ===============================
-high_acc_epochs = [d["epoch"] for d in parsed if d["accuracy"] > 0.75]
-print("High accuracy epochs:", high_acc_epochs)
+for d in parsed:
+    if d["loss"] < lowest_loss:
+        lowest_loss = d["loss"]
+        best_epoch = d["epoch"]
+print("Best epoch in (Lowest loss):", best_epoch)
+
+#================================
+# STEP 3 Calculate improvements
+#================================
+
+first_acc = parsed[0]["accuracy"]
+last_acc = parsed[-1]["accuracy"]
+
+improvement = last_acc - first_acc
+print(f"Accuracy improvement: {improvement:.2f}")
+
+#======================================
+# STEP 4 Find epochs with high accuracy
+#======================================
+
+high_acc_epoch = []
+
+for d in parsed:
+    if d["accuracy"] > 0.75:
+        high_acc_epoch.append(d["epoch"])
+print("High accuracy epochs:", high_acc_epoch)
