@@ -1,4 +1,7 @@
 # list for DL dynamic data
+from os import fpathconf
+
+
 training_losses = [] # will grow during the training
 for epoch in range(1000):
     loss = train_one_epoch()
@@ -175,7 +178,7 @@ def calculate_metrics(y_true, y_pred):
 
     precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
     recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
-    f1 = (2 * precisio * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
+    f1 = (2 * precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
     
     accuracy = (tp + tn) / (tp + tn + fp + fn)
 
@@ -207,7 +210,6 @@ print(f"TP: {metrics['confusion_matrix']['TP']}")
 print(f"FP: {metrics['confusion_matrix']['FP']}")
 print(f"TN: {metrics['confusion_matrix']['TN']}")
 print(f"FN: {metrics['confusion_matrix']['FN']}")
-
 
 
 
