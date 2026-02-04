@@ -143,5 +143,9 @@ logs = [
 ]
 
 # Return: [123, 456] (users who appear more than once)
-unique = list(set([log["user_id"] for log in logs]))
-print("Unique users:", unique)
+user_count = {}
+for log in logs:
+    user_id = log["user_id"]
+    user_count[user_id] = user_count.get(user_id, 0) + 1
+duplicates = [user_id for user_id, count in user_count.items() if count > 1]
+print("Duplicates:", duplicates)
