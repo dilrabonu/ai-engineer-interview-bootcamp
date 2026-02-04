@@ -156,8 +156,58 @@ def find_user_duplicate(logs):
     for log in logs:
         user_id = log["user_id"]
         user_count[user_id] = user_count.get(user_id, 0) + 1
-    duplicates = [user_id for user_id, count in user_count.item(), if count > 1]
+    duplicates = [user_id for user_id, count in user_count.items() if count > 1]
     return duplicates
-result = find_user_duplicates(logs)
+result = find_user_duplicate(logs)
 print(f"Duplicates: {result}")
+
+# Ml Task Calculate metric from scratch
+def calculate_metrics(y_true, y_pred):
+    y_ture = np.array(y_true)
+    y_pred = np.array(y_pred)
+    if len(y_true) != len(y_pred):
+        raise ValueError("y_true and y_pred must have same length")
+    
+    tp = np.sum((y_pred == 1) & (y_true == 1))
+    fp = np.sum((y_pred == 1) & (y_ture == 0))
+    tn = np.sum((y_pred == 0) & (y_true == 0))
+    fn = np.sum((y_pred == 0) & (y_true == 1))
+
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+    f1 = (2 * precisio * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
+    
+    accuracy = (tp + tn) / (tp + tn + fp + fn)
+
+    return {
+        "precision": precision,
+        "recall": recall,
+        "f1": f1,
+        "accuracy": accuracy,
+        "confusion_matrix": {
+            "TP": tp,
+            "FP": fp,
+            "TN": tn,
+            "FN": fn
+        }
+    }
+
+y_true = [1,0,1,1,0,1,0,0,1,0]
+y_pred = [1,0,1,0,0,1,1,0,1,1]
+
+metrics = calculate_metrics(y_true, y_pred)
+
+print("Classification Metrics:")
+print(f"Precision: {metrics['precision']:.4f}")
+print(f"Recall: {metrics['recall']:.4f}")
+print(f"F1-Score: {metrics['f1']:.4f}")
+print(f"Accuracy : {metrics['accuracy']:.4f}")
+print(f"\nConfusion Matrix:")
+print(f"TP: {metrics['confusion_matrix']['TP']}")
+print(f"FP: {metrics['confusion_matrix']['FP']}")
+print(f"TN: {metrics['confusion_matrix']['TN']}")
+print(f"FN: {metrics['confusion_matrix']['FN']}")
+
+
+
 
