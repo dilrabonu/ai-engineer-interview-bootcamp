@@ -149,3 +149,15 @@ for log in logs:
     user_count[user_id] = user_count.get(user_id, 0) + 1
 duplicates = [user_id for user_id, count in user_count.items() if count > 1]
 print("Duplicates:", duplicates)
+
+# time Space good with fucntion
+def find_user_duplicate(logs):
+    user_count = {}
+    for log in logs:
+        user_id = log["user_id"]
+        user_count[user_id] = user_count.get(user_id, 0) + 1
+    duplicates = [user_id for user_id, count in user_count.item(), if count > 1]
+    return duplicates
+result = find_user_duplicates(logs)
+print(f"Duplicates: {result}")
+
