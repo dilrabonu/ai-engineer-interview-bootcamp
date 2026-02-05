@@ -71,3 +71,31 @@ def safe_calculator():
         print("Thanks for using calculator!")
 
 safe_calculator()
+
+def safe_calculator():
+    try:
+        num1 = float(input("Enter a number: "))
+        op = input("Enter operator (/, *, -, + ): ")
+        num2 = float(input("Enter a second number: "))
+
+        if op == "+":
+            result = num1 + num2
+        elif op == "-":
+            result = num1 - num2
+        elif op == "*":
+            result = num1 * num2
+        elif op == "/":
+            if num2 == 0:
+                raise ZeroDivisionError(" Cannot be divided by zero")
+            result = num1 / num2
+        else:
+            raise Valueerror("Invalid operator!")
+    except ValuError as e:
+        print(f" Invalid input:{e}")
+    except ZeroDivisionError as e:
+        print(f"Math error: {e}")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+    finally:
+        print("Thank for using calculator!")
+safe_calculator()
