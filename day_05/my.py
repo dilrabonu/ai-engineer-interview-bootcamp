@@ -11,7 +11,7 @@ class AnalyzerText:
         clean_text = self.text.lower()
 
         punctuation = "/?!@#$%^&*(/*.,)"
-        for char in puctuation:
+        for char in punctuation:
             clean_text = clean_text.replace(char, "")
         self.words = clean_text.split()
 
@@ -19,7 +19,7 @@ class AnalyzerText:
             if word in self.words_count:
                 self.words_count[word] + 1
             else:
-                self.word_counts[word] = 1
+                self.words_count[word] = 1
 
     def get_longest_word(self):
         if not self.words:
@@ -37,3 +37,7 @@ class AnalyzerText:
 
 text = " I have taken an offer from Google for the postion AI/ML Engineer. I am so happy"
 analyzer = AnalyzerText(text)
+analyzer.export_report("my_report.txt")
+print(f" The longest word is: {analyzer.get_longest_word()}")
+print(f"Word count: {analyzer.words_count}")
+print(f"Words: {analyzer.words}")
