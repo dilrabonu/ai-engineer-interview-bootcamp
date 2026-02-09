@@ -30,6 +30,4 @@ for s in students:
     s.study()
     print("After studying:", s)
 
-print("="*60)
-print("Thank you for attention!")
-print("="*60)
+
