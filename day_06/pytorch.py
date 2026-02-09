@@ -16,4 +16,20 @@ class SmallCNN(nn.Module):
         return self.net(x)
 
 
+# top k 
+def _top_k_word():
+    freq = {}
+    for w in words:
+        freq[w] = freq.get(w, 0) + 1
+    return sorted(freq.items(), key=lambda x: x[1], reverse=True)
+
+def find_dup(nums):
+    seen = set()
+    dup = set()
+    for w in nums:
+        if w in seen:
+            dup.add(w)
+        else:
+            seen.add(w)
+    return dup
 
