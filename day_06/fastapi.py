@@ -49,4 +49,13 @@ tab3.write("Contact")
 with tab1:
     st.write("Home")
 
+def chunk_text(text, chunk_size=500, chunk_overlap=50):
+    words = text.split()
+    chunks = []
+    i = 0
+    while i < len(words):
+        chunks.append(" ".join(words[i:i+chunk_size]))
+        i += chunk_size - chunk_overlap
+    return chunks
+
 
