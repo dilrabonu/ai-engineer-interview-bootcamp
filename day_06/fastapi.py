@@ -34,7 +34,8 @@ async def delete_copilot():
 
 st.set_page_config(page_title="balzeVeritas AI", layout="wide")
 API_URL_BASE= os.environ.get("API_URL_BASE", "http://localhost:8000")
-st.markdown"""
+st.markdown
+"""
 
 """
 
