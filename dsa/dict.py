@@ -110,4 +110,20 @@ def isAnagram(s, t):
 
     return freq_s == freq_t
 
+def groupsAnagram(strs):
+    groups = defaultdict(list)
+    for s in strs:
+        key = "".join(sorted(s))
+        groups[key].append(s)
+
+    return list(groups.values())
+
+def containDuplicate(nums):
+    seen = set()
+    for n in nums:
+        if n in seen:
+            return True
+        seen.add(n)
+    return False
+
 
