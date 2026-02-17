@@ -41,4 +41,73 @@ def UniqChar(s):
         if freq[char] == 1:
             return i
     return -1
-    
+
+def TwoSum(nums, target):
+    seen = {}
+    for i , num in enumerate(nums):
+        complement = target - num
+        if complement in seen:
+            return [seen[complement], i]
+
+        seen[num] = i
+    return []    
+
+def TwoSum(nums, target):
+    seen = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in seen:
+            return [seen[complement], i]
+        seen[num] = i
+
+    return []
+
+def UniqChar(s):
+    freq = {}
+    for char in s:
+        ferq[char] = freq.get(char, 0) + 1
+
+    for i, char in enumerate(s):
+        if freq[char] == 1:
+            return i
+    return -1
+
+def TwoSum(nums, target):
+    seen = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in seen:
+            return [seen[complement], i]
+        seen[num] = i
+    return []
+
+def twosum_sorted(nums, target):
+    left, right = 0, len(nums) - 1
+
+    while left < right:
+        current_sum = nums[left] + nums[right]
+        if current_sum == target:
+            return [left + 1, right + 1]
+        elif current_sum < target:
+            left += 1
+        else:
+            right -= 1
+    return []
+
+# Anagram
+def isAnagram(s, t):
+    if len(s) != len(t):
+        return False
+
+    freq_s = {}
+    freq_t = {}
+
+    for char in s:
+        freq_s[char] = freq_s.get(char, 0) + 1
+        
+    for char in t:
+        freq_t[char] = freq_t.get(char, 0) + 1
+
+    return freq_s == freq_t
+
+
