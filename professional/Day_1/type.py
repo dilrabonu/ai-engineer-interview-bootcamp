@@ -42,3 +42,23 @@ print(text.replace("amazing", "fantastic"))
 model_name = "ResNet18"
 accuracy = 0.99
 print(f"Model: {model_name}, Accuracy: {accuracy:.2%}")
+
+# Dict
+from collections import defaultdict
+words_count = defaultdict(int)
+for word in "the cat sat on the mat the cat".split():
+    words_count[word] +=1
+print(dict(words_count))
+
+def add_layer_fixed(layer, layers=None):
+    if layers is None:
+        layers = []
+    layers.append(layer)
+    return layers
+
+accuracy = 87
+acc = "positive" if accuracy >= 80 else "Negative" 
+print(acc)
+
+status = "Converged" if accuracy >= 78 else "Training"
+print(status)
