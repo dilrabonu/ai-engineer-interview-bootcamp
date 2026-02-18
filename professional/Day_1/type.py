@@ -22,3 +22,23 @@ for x in[1,2,3,4]:
     if x == 4:
         break
     print(x)
+
+# List
+squares = [x ** 2 for x in range(10)]
+print(squares)
+
+even_squares = [ x ** 2 for x in range(10) if x  % 2 == 0]
+print(even_squares)
+
+# string
+text = "Deep learning is amazing"
+print(text.lower())
+print(text.upper())
+
+print(text.split())
+print(text.replace("amazing", "fantastic"))
+
+# F string
+model_name = "ResNet18"
+accuracy = 0.99
+print(f"Model: {model_name}, Accuracy: {accuracy:.2%}")
