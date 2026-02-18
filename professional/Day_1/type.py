@@ -62,3 +62,4 @@ print(acc)
 
 status = "Converged" if accuracy >= 78 else "Training"
 print(status)
+
