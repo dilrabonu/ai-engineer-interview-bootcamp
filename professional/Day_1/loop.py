@@ -67,3 +67,7 @@ nums = [1, 2, 3, 4, 5, 6]
 it = iter(nums)
 print(next(it))
 print(next(it))
+
+def generator_batch(data, batch_size):
+    for i in range(0, len(data), batch_size):
+        yield data[i:i+batch_size]
