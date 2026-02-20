@@ -23,3 +23,14 @@ def is_anagram(s, t):
         if freq[ch] == 0:
             del freq[ch]
     return len(freq) == 0
+ 
+# Group Anagram
+from collections import defaultdict
+
+def group_anagram(words):
+    groups = defaultdict(list)
+    for w in words:
+        key = "".join(sorted(w))
+        groups[key].append(w)
+    return list(groups.values())
+
