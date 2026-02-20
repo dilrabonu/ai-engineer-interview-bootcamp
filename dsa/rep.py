@@ -43,3 +43,17 @@ def top_k_freq(nums, k):
         freq[n] = freq.get(n, 0) + 1
     top = heapq.nlargest(k, freq.items(), key=lambda p: p[1])
     return [elem for elem, count in top]
+
+# Longest substring without repeating characters
+def longest_no_repeat(s):
+    last = {}
+    left = 0
+    best = 0
+
+    for right, ch in enumerate(s):
+        if ch in last and last[ch] >= left:
+            left = last[ch] + 1
+        last[ch] = right
+        best = max(best, right - left + 1)
+    return best
+
