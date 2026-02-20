@@ -34,3 +34,12 @@ def group_anagram(words):
         groups[key].append(w)
     return list(groups.values())
 
+# find k top
+import heapq
+
+def top_k_freq(nums, k):
+    freq = {}
+    for n in nums:
+        freq[n] = freq.get(n, 0) + 1
+    top = heapq.nlargest(k, freq.items(), key=lambda p: p[1])
+    return [elem for elem, count in top]
