@@ -88,4 +88,31 @@ def target_encode(df, col, target, smoothing=10):
                 / (agg['count'] + smoothing)
     return df[col].map(smoothed)
 
-    
+# Feature Engineering
+class StandardScaler: #z = (x - mean) / std
+    def fit(self, X):
+        self.mean = X.mean(axis=0)
+        self.std = X.std(axis=0)
+        return self
+    def transform(self, X):
+        return (X - self.mean) / self.std
+
+class MinMaxScaler: #x' = (x - min) / (max - min)
+    def fit(self, X):
+        self.min = X.min(axis=0)
+        self.max = X.max(axis=0)
+        return self
+    def transform(self, X):
+        return (X - self.min) / (self.max -self.min)
+
+class RobustScaler: #x' = (x - median) / IQR    
+    def fit(self, X):
+        self.median  = np.median(X, axis=1)
+        self.iqr = np.percentile(X,75,0) - np.percentile(X,75,0)
+        return self
+    def transform(self, X):
+        return (X - self.median) / self.iqr
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
