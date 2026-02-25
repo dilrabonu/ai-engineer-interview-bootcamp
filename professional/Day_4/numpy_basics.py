@@ -28,3 +28,29 @@ class PCA:
 
     def transform(self, X):
         return (X - self.mean) @ self.components.T
+
+# GroupBy
+df.groupby('education').agg(
+    avg_income=('income', 'mean'),
+    count=('target', 'count'),
+    target_rate=('target', 'mean'),
+)
+# Multiple groupby
+df.groupby(['education', 'city'])['income'].agg(['mean', 'std', 'count'])
+df['income_zscore'] = df.groupby('education')['income'].transform(
+    lambda x: (x - x.mean()) / x.std()
+)
+df.groupby('education').apply(
+    lambda g: g.nlargest(3, 'income')
+)
+# Merge, Concat, Pivot
+pd.merge(users, orders, on='user_id', how='inner')
+pd.merge(users, orders, on='user_id', how='left')
+pd.merge(users, orders, on='user_id', how='outer')
+
+pd.concat([df1, df2], axis=0, ignore_index=True)
+pd.concat([df1, df2], axis=1)
+
+df.pivot_table(values='income', index='education',
+    columns='target', aggfunc='mean')
+pd.melt(wide_df, id_vars='model', var_name='metric', value_name='score')
