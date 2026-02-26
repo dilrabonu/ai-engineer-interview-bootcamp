@@ -27,7 +27,8 @@ class LinearRegressionGD:
     def fit(self, X, y):
         X = np.asarray(X, dtype=float)
         y = np.asarray(y, dtype=float).reshape(-1)
-
+    
+    
         n, d = X.shape
 
         self.w = np.zeros(d)
@@ -48,5 +49,9 @@ class LinearRegressionGD:
             self.w -= self.lr * dw
             self.b -= self.lr * db
         return self
+
+    def predict(self, X):
+        X = np.asarray(X, dtype=float)
+        return X @ self.w _ self.b
 
 
