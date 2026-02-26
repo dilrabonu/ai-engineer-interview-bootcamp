@@ -23,3 +23,10 @@ class LinearRegressionGD:
         for epoch in range(self.epochs):
             y_pred = X @ self.w + self.b 
             error = y_pred - y
+
+            dw = (2/n) * (X.T @ error) # gradient w.r.t weights
+            db = (2/n) * np.sum(error)
+
+            self.weights -= self.lr * dw
+            self.bias -= self.lr *db
+        return self
