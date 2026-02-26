@@ -30,3 +30,10 @@ class LinearRegressionGD:
             self.weights -= self.lr * dw
             self.bias -= self.lr *db
         return self
+
+# Polynomial Regression
+def polynomial_features(X, degree=2):
+    features = [X]
+    for d in range(2, degree + 1):
+        features.append(X ** d)
+    return np.column_stack(features)
