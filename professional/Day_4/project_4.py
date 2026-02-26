@@ -96,5 +96,24 @@ class LogisticRegressionGD:
 
         n, d = X.shape
         #Initialize parameters
+        self.w = np.zeros(d)
+        self.b = 0.0
 
+        eps = 1e-12
+
+        for _ in range(self.epochs):
+            p = self.predict_proba(X)
+
+            loss = -np.mean(y * np.log(p + eps) + np.log(1 - p + eps))
+            self.loss_history.append(loss)
+
+            # Gradient
+            error = p - y
+            dw = (1.0 / n) * (X.T @ error)
+            db = (1.0 / n) * np.sum(error)
+
+            # Update
+            self.w -= self.lr * dw
+            self.b -= self.lr * db
+        return self
 
