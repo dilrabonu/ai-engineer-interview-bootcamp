@@ -56,12 +56,12 @@ X = torch.randn(5, 3)
 # Binary classifier
 bin_model = TinyNet(in_features=3, hidden=8, out_features=1)
 bin_probs = bin_model(X, task='binary') # forward pass
-print("Binary probabilities shape": bin_probs.shape)
+print("Binary probabilities shape:", bin_probs.shape)
 print(bin_probs)
 
 # Multi-class classifier
 mul_model = TinyNet(in_features=3, hidden=8, out_features=4)
 mul_probs = mul_model(X, task='multiclass')
-print("\nMulticlass probabilities shape": mul_probs.shape)
+print("\nMulticlass probabilities shape:", mul_probs.shape)
 print(mul_probs)
 print("Row sums (should be 1):", mul_probs.sum(dim=1))
