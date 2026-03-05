@@ -11,6 +11,7 @@ model = nn.Sequential(
 loss_fn = nn.MSELoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001, weight_decay=0.01)
 
+model.train()
 for epoch in range(100):
     x = torch.randn(32,20)
     y = torch.randn(32,1)
@@ -21,3 +22,6 @@ for epoch in range(100):
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
+
+    if epoch % 10 == 0:
+        print(f"Epoch {epoch}, Loss: {loss.item():.4f}")
